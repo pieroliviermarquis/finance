@@ -1,3 +1,5 @@
+import pandas as pd
+
 def get_fred_data(series):
 
   df_all = pd.DataFrame()
