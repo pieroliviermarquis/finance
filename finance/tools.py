@@ -2,7 +2,6 @@ import pandas as pd
 import requests
 
 
-
 def get_fred_data(series):
 
   df_all = pd.DataFrame()
