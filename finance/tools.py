@@ -1,6 +1,8 @@
 import pandas as pd
 import requests
 
+
+
 def get_fred_data(series):
 
   df_all = pd.DataFrame()
@@ -15,3 +17,13 @@ def get_fred_data(series):
     df_all = pd.concat([df_all, df], axis=1)
 
   return df_all
+
+
+def clean_fred_data(data):
+
+  data.ffill(inplace=True)
+  cols = data.columns
+  data[cols] = data[cols].apply(pd.to_numeric, errors='coerce', axis=1)
+  data.dropna(inplace=True)
+
+  return data
