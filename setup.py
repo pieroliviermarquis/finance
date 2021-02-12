@@ -1,9 +1,9 @@
 from distutils.core import setup
 
 setup(
-    name='financial',
+    name='finance',
     version='1.0',
-    packages=['financial',],
+    packages=['finance',],
     license=Creative Commons Attribution-Noncommercial-Share Alike license',
     long_description=open('README.txt').read(),
 )
