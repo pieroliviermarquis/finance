@@ -10,9 +10,10 @@ def get_fred_data(series):
     df = pd.DataFrame.from_dict(r['observations'])
     df = df[['date', 'value']]
     df.set_index('date', inplace=True)
-    df.rename(columns={'value': name}, inplace=True)
     df.index = pd.to_datetime(df.index)
+    df.rename(columns={'value': name}, inplace=True)
     df_all = pd.concat([df_all, df], axis=1)
+    
   return df_all
 
 
@@ -22,4 +23,5 @@ def clean_fred_data(data):
   cols = data.columns
   data[cols] = data[cols].apply(pd.to_numeric, errors='coerce', axis=1)
   data.dropna(inplace=True)
+  
   return data
