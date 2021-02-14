@@ -1,4 +1,26 @@
 import plotly.io as pio
+from colour import Color
+
+
+
+#Color Reference
+============================================================================================
+
+c1 = Color('#ff0074')
+c2 = Color('#19000b')
+gradient1 = list(c1.range_to(Color(c2),10))
+gradient1 = [c.get_hex() for c in gradient1]
+
+c1 = Color('#00bfff')
+c2 = Color('#001319')
+gradient2 = list(c1.range_to(Color(c2),10))
+gradient2 = [c.get_hex() for c in gradient2]
+
+colors=[gradient1, gradient2]
+
+
+#Plotly Settings
+============================================================================================
 
 pio.templates.default = "plotly_dark"
 template = pio.templates["plotly_dark"].layout
@@ -35,6 +57,8 @@ hist_marker=dict(
 config = {'scrollZoom': True}
 
 
+
+#Safekeeping
 ============================================================================================
 
 """
