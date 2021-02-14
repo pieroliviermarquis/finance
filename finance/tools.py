@@ -9,7 +9,6 @@ quandl.ApiConfig.api_key = 'pJJuX2wRviVz6PC2hDpg'
 def get_fred_data(series):
   """
   https://api.stlouisfed.org
-  
   Args:
     series (dict): {'Name of your series' : 'FRED series code'}
   Returns:
