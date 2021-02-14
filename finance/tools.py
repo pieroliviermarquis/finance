@@ -1,5 +1,8 @@
 import pandas as pd
 import requests
+import quandl
+
+quandl.ApiConfig.api_key = 'pJJuX2wRviVz6PC2hDpg'
 
 
 def get_fred_data(series):
@@ -15,7 +18,6 @@ def get_fred_data(series):
     df_all = pd.concat([df_all, df], axis=1)
   return df_all
 
-
 def clean_fred_data(df):
 
   df.ffill(inplace=True)
@@ -23,7 +25,6 @@ def clean_fred_data(df):
   df[cols] = df[cols].apply(pd.to_numeric, errors='coerce', axis=1)
   df.dropna(inplace=True)
   return df
-
 
 def get_sm_data():
   
@@ -34,3 +35,15 @@ def get_sm_data():
   df.index = pd.to_datetime(df.index)
   df.drop(['price'], axis=1, inplace=True)
   return df
+
+def get aaii_data(start_date, end_date, resample=False, freq='B', ffill=False):
+  
+  aaii = quandl.get('AAII/AAII_SENTIMENT', start_date=start_date, end_date=end_date)
+  df = aaii[['Bullish', 'Neutral', 'Bearish']]
+  if resample:
+    df = df.resample(freq).asfreq()
+    df = df.ffill(axis = 0) 
+  return df
+    
+    
+    
