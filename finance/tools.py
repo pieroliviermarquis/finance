@@ -1,6 +1,7 @@
 import pandas as pd
 import requests
 import quandl
+import io
 
 quandl.ApiConfig.api_key = 'pJJuX2wRviVz6PC2hDpg'
 
