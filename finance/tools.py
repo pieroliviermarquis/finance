@@ -24,6 +24,7 @@ def clean_fred_data(df):
   df.dropna(inplace=True)
   return df
 
+
 def get_sm_data():
   
   r = requests.get('https://squeezemetrics.com/monitor/static/DIX.csv')
