@@ -7,7 +7,14 @@ quandl.ApiConfig.api_key = 'pJJuX2wRviVz6PC2hDpg'
 
 
 def get_fred_data(series):
+  """
+  https://api.stlouisfed.org
   
+  Args:
+    series (dict): {'Name of your series' : 'FRED series code'}
+  Returns:
+    DataFrame
+  """
   df_all = pd.DataFrame()
   for name, serie in series.items():
     r = requests.get('https://api.stlouisfed.org/fred/series/observations?series_id=' + str(serie) + '&api_key=465e1b96e52576cf38130016ce9994d2&file_type=json').json()
@@ -28,7 +35,11 @@ def clean_fred_data(df):
   return df
 
 def get_sm_data():
-  
+  """
+  Get data from https://squeezemetrics.com
+  Returns:
+    DataFrame
+  """
   r = requests.get('https://squeezemetrics.com/monitor/static/DIX.csv')
   df = pd.read_csv(io.BytesIO(r.content), encoding='utf-8')  
   df.set_index(['date'], inplace=True)
@@ -38,7 +49,13 @@ def get_sm_data():
   return df
 
 def get_aaii_data(start_date, end_date, resample=False, freq='B', ffill=False):
-  
+  """
+  Args:
+    resample (boolean): Wether or not the data is to be resample
+    freq (str): Pandas frequency string
+  Returns:
+    DataFrame
+  """
   aaii = quandl.get('AAII/AAII_SENTIMENT', start_date=start_date, end_date=end_date)
   df = aaii[['Bullish', 'Neutral', 'Bearish']]
   if resample:
