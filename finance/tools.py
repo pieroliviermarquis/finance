@@ -16,10 +16,20 @@ def get_fred_data(series):
   return df_all
 
 
-def clean_fred_data(data):
+def clean_fred_data(df):
 
-  data.ffill(inplace=True)
-  cols = data.columns
-  data[cols] = data[cols].apply(pd.to_numeric, errors='coerce', axis=1)
-  data.dropna(inplace=True)
-  return data
+  df.ffill(inplace=True)
+  cols = df.columns
+  df[cols] = df[cols].apply(pd.to_numeric, errors='coerce', axis=1)
+  df.dropna(inplace=True)
+  return df
+
+def get_sm_data():
+  
+  r = requests.get('https://squeezemetrics.com/monitor/static/DIX.csv')
+  df = pd.read_csv(io.BytesIO(r.content), encoding='utf-8')  
+  df.set_index(['date'], inplace=True)
+  df = df.apply(pd.to_numeric, errors='coerce')
+  df.index = pd.to_datetime(df.index)
+  df.drop(['price'], axis=1, inplace=True)
+  return df
