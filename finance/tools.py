@@ -36,7 +36,7 @@ def get_sm_data():
   df.drop(['price'], axis=1, inplace=True)
   return df
 
-def get aaii_data(start_date, end_date, resample=False, freq='B', ffill=False):
+def get_aaii_data(start_date, end_date, resample=False, freq='B', ffill=False):
   
   aaii = quandl.get('AAII/AAII_SENTIMENT', start_date=start_date, end_date=end_date)
   df = aaii[['Bullish', 'Neutral', 'Bearish']]
